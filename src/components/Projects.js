@@ -33,23 +33,7 @@ const Projects = () => {
       []
     );
   });
-  const projects = [
-    {
-      title: "Small City",
-      description: "Computer Graphic",
-      imgUrl: `data:image/jpeg;base64,${Projectcard.projek3}`,
-    },
-    {
-      title: "CarWash",
-      description: "UI Design",
-      imgUrl: `data:image/jpeg;base64,${Projectcard.projek1}`,
-    },
-    {
-      title: "Roll a Ball",
-      description: "Game Development",
-      imgUrl: `data:image/jpeg;base64,${Projectcard.projek4}`,
-    },
-  ];
+  const projects = [];
 
   return (
     <section className="project" id="projects">
