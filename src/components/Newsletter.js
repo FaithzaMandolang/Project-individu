@@ -1,46 +1,36 @@
-import { useState, useEffect } from "react";
-import { Col, Row, Alert } from "react-bootstrap";
-
-export const Newsletter = ({ status, message, onValidated }) => {
-  const [email, setEmail] = useState('');
-
-  useEffect(() => {
-    if (status === 'success') clearFields();
-  }, [status])
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    email &&
-    email.indexOf("@") > -1 &&
-    onValidated({
-      EMAIL: email
-    })
-  }
-
-  const clearFields = () => {
-    setEmail('');
-  }
-
+const Newsletter = ({ status, message, onValidated }) => {
   return (
-      <Col lg={12}>
-        <div className="newsletter-bx wow slideInUp">
-          <Row>
-            <Col lg={12} md={6} xl={5}>
-              <h3>Subscribe to our Newsletter<br></br> & Never miss latest updates</h3>
-              {status === 'sending' && <Alert>Sending...</Alert>}
-              {status === 'error' && <Alert variant="danger">{message}</Alert>}
-              {status === 'success' && <Alert variant="success">{message}</Alert>}
-            </Col>
-            <Col md={6} xl={7}>
-              <form onSubmit={handleSubmit}>
-                <div className="new-email-bx">
-                  <input value={email} type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email Address" />
-                  <button type="submit">Submit</button>
-                </div>
-              </form>
-            </Col>
-          </Row>
+    <div className="container">
+      <div className="row">
+        <div className="col-lg-12">
+          <div className="newsletter-bx">
+            <div className="row">
+              <div className="col-lg-12 col-md-6 col-xl-5">
+                <h3>
+                  Subscribe to our Newsletter
+                  <br />
+                  &amp; Never miss latest updates
+                </h3>
+                <div id="status-message" />
+              </div>
+              <div className="col-md-6 col-xl-7">
+                <form id="newsletter-form">
+                  <div className="new-email-bx">
+                    <input
+                      type="email"
+                      id="email-input"
+                      placeholder="Email Address"
+                      required
+                    />
+                    <button type="submit">Submit</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
-      </Col>
-  )
-}
+      </div>
+    </div>
+  );
+};
+export default Newsletter;
