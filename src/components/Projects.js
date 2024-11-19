@@ -2,9 +2,11 @@ import { Container, Row, Col, Tab, Nav } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { getDatabase, ref, onValue } from "firebase/database";
 import ProjectCard from "./ProjectCard";
-import projImg1 from "../assets/img/project-img1.png";
-import projImg2 from "../assets/img/project-img2.png";
-import projImg3 from "../assets/img/project-img3.png";
+import screenShot from "../assets/img/Screenshot 2024-11-20 010755.png";
+import screenShot3 from "../assets/img/Screenshot 2024-11-20 010245.png";
+import screenShot2 from "../assets/img/Screenshot 2024-11-20 012017.png";
+import screenShot4 from "../assets/img/Screenshot 2024-11-20 010524.png";
+import screenShot5 from "../assets/img/Screenshot (237).png";
 import colorSharp2 from "../assets/img/color-sharp2.png";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
@@ -23,49 +25,31 @@ const Projects = () => {
       []
     );
   });
-  const [Projectcard, setProjectcard] = useState({});
-  useEffect(() => {
-    const db = getDatabase();
-    const ProjectcardRef = ref(db, "Projectcards/");
-    onValue(
-      ProjectcardRef,
-      (snapshot) => {
-        const data = snapshot.val();
-        setProjectcard(data);
-      },
-      []
-    );
-  });
   const projects = [
     {
-      title: "Business Startup",
-      description: "Design & Development",
-      imgUrl: projImg1,
+      title: "CarWash",
+      description: "UI Design",
+      imgUrl: screenShot,
     },
     {
-      title: "Business Startup",
-      description: "Design & Development",
-      imgUrl: projImg2,
+      title: "Roll a ball",
+      description: "Game Development",
+      imgUrl: screenShot5,
     },
     {
-      title: "Business Startup",
-      description: "Design & Development",
-      imgUrl: projImg3,
+      title: "Small Town",
+      description: "Computer Graphic",
+      imgUrl: screenShot2,
     },
     {
-      title: "Business Startup",
-      description: "Design & Development",
-      imgUrl: projImg1,
+      title: "PetShop",
+      description: "Web Design",
+      imgUrl: screenShot3,
     },
     {
-      title: "Business Startup",
-      description: "Design & Development",
-      imgUrl: projImg2,
-    },
-    {
-      title: "Business Startup",
-      description: "Design & Development",
-      imgUrl: projImg3,
+      title: "Coffee Shop",
+      description: "FrontEnd",
+      imgUrl: screenShot4,
     },
   ];
 
