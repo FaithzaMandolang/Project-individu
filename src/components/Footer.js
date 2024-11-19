@@ -40,7 +40,11 @@ const Footer = () => {
                 <img src={navIcon3} alt="Icon" />
               </a>
             </div>
-            <p>Copyright 2022. All Rights Reserved</p>
+            <p>
+              Maap sir, tidak semua data foto dimasukan ke firebase, terutama
+              data projek. karena faith belum bisa solve error jika memanggil
+              data foto dari firebase kedalam array
+            </p>
           </Col>
         </Row>
       </Container>
