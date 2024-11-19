@@ -3,6 +3,9 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 import { getDatabase, ref, onValue } from "firebase/database";
 import { HashLink } from "react-router-hash-link";
 import { BrowserRouter as Router } from "react-router-dom";
+import navIcon1 from "../assets/img/nav-icon1.svg";
+import navIcon2 from "../assets/img/nav-icon2.svg";
+import navIcon3 from "../assets/img/nav-icon3.svg";
 
 const NavBar = () => {
   const [activeLink, setActiveLink] = useState("home");
@@ -85,19 +88,13 @@ const NavBar = () => {
             <span className="navbar-text">
               <div className="social-icon">
                 <a href="#">
-                  <img
-                    src={`data:image/jpeg;base64,${NavBar.linkedin}`}
-                    alt=""
-                  />
+                  <img src={navIcon1} alt="" />
                 </a>
                 <a href="#">
-                  <img
-                    src={`data:image/jpeg;base64,${NavBar.facebook}`}
-                    alt=""
-                  />
+                  <img src={navIcon2} alt="" />
                 </a>
                 <a href="#">
-                  <img src={`data:image/jpeg;base64,${NavBar.ig}`} alt="" />
+                  <img src={navIcon3} alt="" />
                 </a>
               </div>
               <HashLink to="#connect">

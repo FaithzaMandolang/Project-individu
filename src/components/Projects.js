@@ -35,29 +35,19 @@ const Projects = () => {
   });
   const projects = [
     {
-      title: "CarWash",
-      description: "UI Design",
-      imgUrl: `data:image/jpeg;base64,${Projectcard.projek2}`,
-    },
-    {
       title: "Small City",
       description: "Computer Graphic",
       imgUrl: `data:image/jpeg;base64,${Projectcard.projek3}`,
     },
     {
-      title: "PetShop",
-      description: "Web Design",
+      title: "CarWash",
+      description: "UI Design",
       imgUrl: `data:image/jpeg;base64,${Projectcard.projek1}`,
     },
     {
       title: "Roll a Ball",
       description: "Game Development",
       imgUrl: `data:image/jpeg;base64,${Projectcard.projek4}`,
-    },
-    {
-      title: "Coffee Shop",
-      description: "FrontEnd",
-      imgUrl: `data:image/jpeg;base64,${Projectcard.projek5}`,
     },
   ];
 
