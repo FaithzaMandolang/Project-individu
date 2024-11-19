@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
+import { getDatabase, ref, onValue } from "firebase/database";
 import { Container, Row, Col } from "react-bootstrap";
-import headerImg from "../assets/img/header-img.svg";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
 
@@ -8,10 +8,24 @@ const Banner = () => {
   const [loopNum, setLoopNum] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState("");
+  const [Banner, setBanner] = useState({});
   const [delta, setDelta] = useState(300 - Math.random() * 100);
   const [index, setIndex] = useState(1);
-  const toRotate = ["Web Developer", "Web Designer", "UI/UX Designer"];
+  const toRotate = ["Web Developer", "Web Designer", "Progammer"];
   const period = 2000;
+
+  useEffect(() => {
+    const db = getDatabase();
+    const BannerRef = ref(db, "Banner/");
+    onValue(
+      BannerRef,
+      (snapshot) => {
+        const data = snapshot.val();
+        setBanner(data);
+      },
+      []
+    );
+  });
 
   useEffect(() => {
     let ticker = setInterval(() => {
@@ -62,7 +76,7 @@ const Banner = () => {
                     isVisible ? "animate__animated animate__fadeIn" : ""
                   }
                 >
-                  <span className="tagline">Welcome to my Portfolio</span>
+                  <span className="tagline">{Banner.title}</span>
                   <h1>
                     {`Hi! I'm Faithza a`}{" "}
                     <span
@@ -73,7 +87,7 @@ const Banner = () => {
                       <span className="wrap">{text}</span>
                     </span>
                   </h1>
-                  <p>I'm a Student of Universitas Klabat.</p>
+                  <p>{Banner.info}</p>
                 </div>
               )}
             </TrackVisibility>
@@ -86,7 +100,10 @@ const Banner = () => {
                     isVisible ? "animate__animated animate__zoomIn" : ""
                   }
                 >
-                  <img src={headerImg} alt="Header Img" />
+                  <img
+                    src={`data:image/jpeg;base64,${Banner.foto}`}
+                    alt="Header Img"
+                  />
                 </div>
               )}
             </TrackVisibility>

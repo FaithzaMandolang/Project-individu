@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import { getDatabase, ref, onValue } from "firebase/database";
 import meter1 from "../assets/img/meter1.svg";
 import meter2 from "../assets/img/meter2.svg";
 import meter3 from "../assets/img/meter3.svg";
@@ -6,6 +8,19 @@ import "react-multi-carousel/lib/styles.css";
 import colorSharp from "../assets/img/color-sharp.png";
 
 const Skills = () => {
+  const [Skills, setSkills] = useState({});
+  useEffect(() => {
+    const db = getDatabase();
+    const SkillsRef = ref(db, "Skills/");
+    onValue(
+      SkillsRef,
+      (snapshot) => {
+        const data = snapshot.val();
+        setSkills(data);
+      },
+      []
+    );
+  });
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -32,13 +47,8 @@ const Skills = () => {
         <div className="row">
           <div className="col-12">
             <div className="skill-bx wow zoomIn">
-              <h2>Skills</h2>
-              <p>
-                Here are the skills and expertise I have developed through
-                experience, learning, and various projects. These skills reflect
-                my commitment to continuous growth and delivering the best
-                results in every opportunity
-              </p>
+              <h2>{Skills.title}</h2>
+              <p>{Skills.text}</p>
               <Carousel
                 responsive={responsive}
                 infinite={true}
@@ -46,26 +56,30 @@ const Skills = () => {
               >
                 <div className="item">
                   <img src={meter1} alt="Image" />
-                  <h5>Web Development</h5>
+                  <h5>{Skills.skil1}</h5>
                 </div>
                 <div className="item">
                   <img src={meter2} alt="Image" />
-                  <h5>Game Development</h5>
+                  <h5>{Skills.skil2}</h5>
                 </div>
                 <div className="item">
                   <img src={meter3} alt="Image" />
-                  <h5>Programming</h5>
+                  <h5>{Skills.skil3}</h5>
                 </div>
                 <div className="item">
                   <img src={meter1} alt="Image" />
-                  <h5>Web Designer</h5>
+                  <h5>{Skills.skil4}</h5>
                 </div>
               </Carousel>
             </div>
           </div>
         </div>
       </div>
-      <img className="background-image-left" src={colorSharp} alt="Image" />
+      <img
+        className="background-image-left"
+        src={`data:image/jpeg;base64,${Skills.color}`}
+        alt="Image"
+      />
     </section>
   );
 };

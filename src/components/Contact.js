@@ -1,20 +1,35 @@
 import "animate.css";
+import { useState, useEffect } from "react";
+import { getDatabase, ref, onValue } from "firebase/database";
 
 const Contact = () => {
+  const [Contact, setContact] = useState({});
+  useEffect(() => {
+    const db = getDatabase();
+    const ContactRef = ref(db, "Contact/");
+    onValue(
+      ContactRef,
+      (snapshot) => {
+        const data = snapshot.val();
+        setContact(data);
+      },
+      []
+    );
+  });
   return (
     <section className="contact" id="connect">
       <div className="container">
         <div className="row align-items-center">
           <div className="col-12 col-md-6">
             <img
-              src="https://example.com/contact-img.svg"
+              src={`data:image/jpeg;base64,${Contact.foto}`}
               alt="Contact Us"
               id="contactImage"
             />
           </div>
           <div className="col-12 col-md-6">
             <div>
-              <h2>Get In Touch</h2>
+              <h2>{Contact.judul}</h2>
               <form id="contactForm">
                 <div className="row">
                   <div className="col-12 col-sm-6 px-1">

@@ -1,4 +1,6 @@
 import { Container, Row, Col, Tab, Nav } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { getDatabase, ref, onValue } from "firebase/database";
 import ProjectCard from "./ProjectCard";
 import projImg1 from "../assets/img/project-img1.png";
 import projImg2 from "../assets/img/project-img2.png";
@@ -8,31 +10,57 @@ import "animate.css";
 import TrackVisibility from "react-on-screen";
 
 const Projects = () => {
+  const [Project, setProject] = useState({});
+  useEffect(() => {
+    const db = getDatabase();
+    const ProjectRef = ref(db, "project/");
+    onValue(
+      ProjectRef,
+      (snapshot) => {
+        const data = snapshot.val();
+        setProject(data);
+      },
+      []
+    );
+  });
+  const [Projectcard, setProjectcard] = useState({});
+  useEffect(() => {
+    const db = getDatabase();
+    const ProjectcardRef = ref(db, "Projectcards/");
+    onValue(
+      ProjectcardRef,
+      (snapshot) => {
+        const data = snapshot.val();
+        setProjectcard(data);
+      },
+      []
+    );
+  });
   const projects = [
     {
-      title: "Business Startup",
-      description: "Design & Development",
-      imgUrl: projImg1,
+      title: "CarWash",
+      description: "UI Design",
+      imgUrl: `data:image/jpeg;base64,${Projectcard.projek2}`,
     },
     {
-      title: "Business Startup",
-      description: "Design & Development",
-      imgUrl: projImg2,
+      title: "Small City",
+      description: "Computer Graphic",
+      imgUrl: `data:image/jpeg;base64,${Projectcard.projek3}`,
     },
     {
-      title: "Business Startup",
-      description: "Design & Development",
-      imgUrl: projImg3,
+      title: "PetShop",
+      description: "Web Design",
+      imgUrl: `data:image/jpeg;base64,${Projectcard.projek1}`,
     },
     {
-      title: "Business Startup",
-      description: "Design & Development",
-      imgUrl: projImg1,
+      title: "Roll a Ball",
+      description: "Game Development",
+      imgUrl: `data:image/jpeg;base64,${Projectcard.projek4}`,
     },
     {
-      title: "Business Startup",
-      description: "Design & Development",
-      imgUrl: projImg2,
+      title: "Coffee Shop",
+      description: "FrontEnd",
+      imgUrl: `data:image/jpeg;base64,${Projectcard.projek5}`,
     },
     {
       title: "Business Startup",
@@ -53,13 +81,8 @@ const Projects = () => {
                     isVisible ? "animate__animated animate__fadeIn" : ""
                   }
                 >
-                  <h2>Projects</h2>
-                  <p>
-                    I believe that every project is an opportunity to learn and
-                    grow. This section showcases a selection of projects I have
-                    created, each with its own unique story and the challenges I
-                    faced along the way
-                  </p>
+                  <h2>{Project.title}</h2>
+                  <p>{Project.intro}</p>
                   <Tab.Container id="projects-tabs" defaultActiveKey="first">
                     <Tab.Content
                       id="slideInUp"
